@@ -1,0 +1,10 @@
+# Raw SAAQ data (fetched by the pipeline, never committed)
+raw/
+pipeline/raw/
+
+# Node
+node_modules/
+
+# Astro build output
+dist/
+.astro/

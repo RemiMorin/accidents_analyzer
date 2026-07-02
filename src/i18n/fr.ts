@@ -49,6 +49,7 @@ export const ui = {
     severity: 'Gravité',
     region: 'Régions administratives',
     reset: 'Réinitialiser',
+    allHint: 'Aucune sélection = toutes',
   },
   stats: {
     total: 'Collisions',

@@ -46,10 +46,11 @@ export function Filters({ meta, value, onChange }: Props) {
 
       <fieldset>
         <legend>{ui.filters.severity}</legend>
+        <p class="filter-hint">{ui.filters.allHint}</p>
         {SEVERITY_LABELS.map((label, id) => (
           <label key={id}>
             <input type="checkbox"
-              checked={value.severities.length === 0 || value.severities.includes(id as SeverityId)}
+              checked={value.severities.includes(id as SeverityId)}
               onChange={() => set({ severities: toggle(value.severities, id as SeverityId) })} />
             {label}
           </label>
@@ -58,10 +59,11 @@ export function Filters({ meta, value, onChange }: Props) {
 
       <fieldset>
         <legend>{ui.filters.region}</legend>
+        <p class="filter-hint">{ui.filters.allHint}</p>
         {meta.regionCodes.map((code) => (
           <label key={code}>
             <input type="checkbox"
-              checked={value.regions.length === 0 || value.regions.includes(code)}
+              checked={value.regions.includes(code)}
               onChange={() => set({ regions: toggle(value.regions, code) })} />
             {regionLabel(code)}
           </label>

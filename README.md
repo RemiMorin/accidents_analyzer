@@ -61,9 +61,9 @@ npm test         # unit tests (Vitest)
 
 ### Cloudflare Pages (primary) — via Forgejo Actions
 
-`.forgejo/workflows/deploy.yml` builds and runs `wrangler pages deploy dist` on
-push to `main`. Committed artifacts are used as-is (CI does not run the
-pipeline).
+`.forgejo/workflows/deploy.yml` builds and runs
+`wrangler pages deploy dist --project-name=accidents-analyzer` on push to
+`main`. Committed artifacts are used as-is (CI does not run the pipeline).
 
 Create these **Forgejo Actions repository secrets**:
 

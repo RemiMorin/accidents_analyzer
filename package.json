@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "vitest run",
+    "typecheck": "astro check",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
@@ -28,7 +29,9 @@
     "preact": "^10.29.3"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
     "@testing-library/preact": "^3.2.4",
+    "@types/node": "^26.1.0",
     "csv-parse": "^7.0.0",
     "jsdom": "^29.1.1",
     "tsx": "^4.22.4",

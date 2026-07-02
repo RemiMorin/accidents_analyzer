@@ -25,7 +25,7 @@ export function Charts({ data, idx }: { data: Collisions; idx: number[] }) {
   const bar = (rows: { name: string; count: number }[], sortByCount = false) => ({
     marginLeft: 140,
     x: { label: null, grid: true },
-    y: { label: null },
+    y: { label: null, domain: sortByCount ? undefined : rows.map((r) => r.name) },
     marks: [
       Plot.barX(rows, {
         x: 'count', y: 'name', fill: '#2b6cb0',

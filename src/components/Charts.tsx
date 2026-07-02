@@ -36,7 +36,7 @@ export function Charts({ data, idx }: { data: Collisions; idx: number[] }) {
   });
 
   const byYear = {
-    x: { label: null, tickFormat: '' }, y: { label: null, grid: true },
+    x: { type: 'band', label: null, tickFormat: '' }, y: { label: null, grid: true },
     marks: [Plot.barY(countBy(data, idx, 'year').map((b) => ({ year: String(b.key), count: b.count })),
       { x: 'year', y: 'count', fill: '#2b6cb0' }), Plot.ruleY([0])],
   };

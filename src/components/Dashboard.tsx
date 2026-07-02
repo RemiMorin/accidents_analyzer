@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'preact/hooks';
+import { useMemo, useState, useEffect, useRef } from 'preact/hooks';
 import type { Collisions, Meta } from '../lib/contract';
 import { applyFilters, type FilterState } from '../lib/filters';
 import { stats } from '../lib/aggregate';
@@ -9,12 +9,19 @@ import { Charts } from './Charts';
 import { ui } from '../i18n/fr';
 
 export function Dashboard({ collisions, meta }: { collisions: Collisions; meta: Meta }) {
-  const initial = typeof location !== 'undefined'
-    ? parseQuery(location.search, meta)
-    : defaultFilter(meta);
-  const [filter, setFilter] = useState<FilterState>(initial);
+  const [filter, setFilter] = useState<FilterState>(() => defaultFilter(meta));
 
+  // After hydration, adopt filter state from the URL (avoids SSR/client hydration
+  // mismatch that leaves control inputs showing the default).
   useEffect(() => {
+    if (typeof location !== 'undefined') setFilter(parseQuery(location.search, meta));
+  }, [meta]);
+
+  // Mirror filter state to the URL, but skip the first run so a shared URL is not
+  // cleared before the adopt-effect above restores it.
+  const firstSync = useRef(true);
+  useEffect(() => {
+    if (firstSync.current) { firstSync.current = false; return; }
     if (typeof history === 'undefined') return;
     const q = toQuery(filter, meta);
     history.replaceState(null, '', q ? `?${q}` : location.pathname);
